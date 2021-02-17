@@ -1,0 +1,88 @@
+1. How Is Function Itoa() Written In Embedded C? explain eachcode line
+
+
+  itoa function converts integer into null-terminated string. It can convert negative numbers too. The standard definition  of itoa function is give below
+
+Syntax:
+	char * itoa ( int value, char * str, int base );  
+
+	The string we place in the buffer pass must be large enough to hold the output. Since radix values can either be OCTAL(0 - 7), DECIMAL(0 - 9), or HEX(0 - 9, a - f). When the radix is DECIMAL, itoa() produces 
+
+Return Value:
+	The string pointer will be returned. When we pass a non-valid radix argument, the function will return NULL.
+
+
+Example:
+
+/* Function to convert intger to string */
+
+int itoa ( int n, char *str )
+{
+    // variable declaration 
+    int i,rem,length=0,val;
+
+    // value of n assign to val
+    val = n;
+
+    // logic for length of that num  
+    while ( val != 0)
+    {
+	length++;
+	val = val / 10;
+    }
+
+    // logic for the storing the number into string
+    for ( i = 0; i < length; i++)
+    {
+	// checking the reminder
+	rem = n % 10;
+	n = n / 10;
+
+	// storing the value in string location 
+	str[length - ( i + 1)] = rem + '0';
+    }
+
+    // finally it assign the null character to string 
+    str[length] = '\0';
+}
+
+int main()
+{
+    // variable declaration 
+    char input_string[20];
+    int num;
+
+    // prompt to user to enter the integer number and read that number
+    printf("Enter the integer number : ");
+    scanf("%d",&num);
+
+    // calling the itoa function 
+    itoa(num,input_string);
+
+    // printing the store element in string 
+    printf("integer to string : ");
+    printf("%s\n",input_string);
+
+    return 0;
+
+}
+	
+
+
+
+2. Explain What Is Forward Reference W.r.t. Pointers In embedded C?
+ 
+   Forward reference is when you declare a type but do not define it.
+   Using an identifier before its declaration is called a forward reference.
+   It allows you to use the type by pointer but cannot declare a variable.
+
+  The pointer is a variable which stores the address of another variable. This variable can be of type int, char, array,    function, or any other pointer. The size of the pointer depends on the architecture.
+  
+  For 32-bit architecture, the size of a pointer is 2 bytes.
+  For 64-bit architecture, the size of a pointer is 4 bytes.
+
+
+
+
+
+
